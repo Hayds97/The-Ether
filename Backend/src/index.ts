@@ -1,10 +1,11 @@
-import express from 'express'
+import app from "./app.js"
+import conncectToDatabase from "./db/connection.js";
 
-const app = express(); 
-
-//middlewares
-app.use(express.json()); 
 
 //connection and listeners 
-app.listen(5000,()=>console.log("Server Open"));
-
+conncectToDatabase()
+.then(() => {
+  app.listen(5000, () =>
+    console.log("Server Open & Connected To The Database 🤟"));
+})
+.catch((err) => console.log(err)); 
